@@ -5,6 +5,7 @@ import lv.id.jc.biorhythms.cli.model.Context;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
@@ -20,7 +21,7 @@ public record BiorhythmsCalculatorCommands(Context context) {
             """;
 
     @ShellMethod(value = "set birthday of the person", key = {"birthday", "bd"})
-    public LocalDate birthday(LocalDate birthday) {
+    public LocalDate birthday(@Past LocalDate birthday) {
         context().setBirthday(birthday);
         return birthday;
     }
