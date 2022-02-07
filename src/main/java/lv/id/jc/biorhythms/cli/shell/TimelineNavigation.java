@@ -4,8 +4,12 @@ import lv.id.jc.biorhythms.cli.shell.model.Context;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.temporal.TemporalAdjusters;
 
 @ShellComponent
 public record TimelineNavigation(Context context) {
@@ -31,22 +35,22 @@ public record TimelineNavigation(Context context) {
     }
 
     @ShellMethod(value = "decrease report date by months", key = {"minus months", "-m"})
-    public void minusMonths(int months) {
+    public void minusMonths(@Max(12_000) int months) {
         context().setDate(context().getDate().minusMonths(months));
     }
 
     @ShellMethod(value = "increase report date by months", key = {"plus months", "+m"})
-    public void plusMonths(int months) {
+    public void plusMonths(@Max(12_000) int months) {
         context().setDate(context().getDate().plusMonths(months));
     }
 
     @ShellMethod(value = "decrease report date by months", key = {"minus years", "-y"})
-    public void minusYears(int years) {
+    public void minusYears(@Min(-1000) @Max(1000) int years) {
         context().setDate(context().getDate().minusYears(years));
     }
 
     @ShellMethod(value = "increase report date by months", key = {"plus years", "+y"})
-    public void plusYears(int years) {
+    public void plusYears(@Min(-1000) @Max(1000) int years) {
         context().setDate(context().getDate().plusYears(years));
     }
 
@@ -58,5 +62,17 @@ public record TimelineNavigation(Context context) {
     @ShellMethod("set report month")
     public void setMonth(Month month) {
         context().setDate(context().getDate().withMonth(month.getValue()));
+    }
+
+    @ShellMethod("move report date to the next day of week")
+    public void next(DayOfWeek dayOfWeek) {
+        var adjuster = TemporalAdjusters.next(dayOfWeek);
+        context().setDate(context().getDate().with(adjuster));
+    }
+
+    @ShellMethod("move report date to the next day of week")
+    public void prev(DayOfWeek dayOfWeek) {
+        var adjuster = TemporalAdjusters.previous(dayOfWeek);
+        context().setDate(context().getDate().with(adjuster));
     }
 }
