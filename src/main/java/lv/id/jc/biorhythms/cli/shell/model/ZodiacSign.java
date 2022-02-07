@@ -1,4 +1,4 @@
-package lv.id.jc.biorhythms.cli.model;
+package lv.id.jc.biorhythms.cli.shell.model;
 
 import lombok.Getter;
 

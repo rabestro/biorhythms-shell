@@ -1,7 +1,7 @@
 package lv.id.jc.biorhythms.cli.shell;
 
 import lv.id.jc.biorhythms.cli.format.PrettyPeriodFormat;
-import lv.id.jc.biorhythms.cli.model.Context;
+import lv.id.jc.biorhythms.cli.shell.model.Context;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -34,5 +34,10 @@ public record BiorhythmsCalculatorCommands(Context context) {
                 ChronoUnit.DAYS.between(context.getBirthday(), context().getDate()),
                 PrettyPeriodFormat.getInstance().format(Period.between(context.getBirthday(), context().getDate()))
         );
+    }
+
+    @ShellMethod("prints daily biorhythms report")
+    public void dailyReport() {
+
     }
 }
