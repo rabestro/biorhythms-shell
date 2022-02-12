@@ -1,6 +1,6 @@
 package lv.id.jc.biorhythms.cli.shell;
 
-import lv.id.jc.biorhythms.cli.shell.model.Context;
+import lv.id.jc.biorhythms.cli.model.Context;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -9,6 +9,7 @@ import javax.validation.constraints.Min;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Period;
 import java.time.temporal.TemporalAdjusters;
 
 @ShellComponent
@@ -49,6 +50,16 @@ public record TimelineNavigation(Context context) {
         context().setDate(context().getDate().minusYears(years));
     }
 
+    @ShellMethod(value = "decrease report date by period", key = {"minus", "-"})
+    public void minusPeriod(Period period) {
+        context().setDate(context().getDate().minus(period));
+    }
+
+    @ShellMethod(value = "increase report date by period", key = {"plus", "+"})
+    public void plusPeriod(Period period) {
+        context().setDate(context().getDate().plus(period));
+    }
+
     @ShellMethod(value = "increase report date by months", key = {"plus years", "+y"})
     public void plusYears(@Min(-1000) @Max(1000) int years) {
         context().setDate(context().getDate().plusYears(years));
@@ -74,5 +85,10 @@ public record TimelineNavigation(Context context) {
     public void prev(DayOfWeek dayOfWeek) {
         var adjuster = TemporalAdjusters.previous(dayOfWeek);
         context().setDate(context().getDate().with(adjuster));
+    }
+
+    @ShellMethod("Period")
+    public Period period(Period period) {
+        return period;
     }
 }

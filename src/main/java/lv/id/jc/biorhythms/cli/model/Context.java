@@ -1,4 +1,4 @@
-package lv.id.jc.biorhythms.cli.shell.model;
+package lv.id.jc.biorhythms.cli.model;
 
 import org.springframework.stereotype.Component;
 
