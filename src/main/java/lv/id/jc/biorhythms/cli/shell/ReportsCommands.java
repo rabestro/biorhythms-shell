@@ -35,7 +35,7 @@ public class ReportsCommands {
         return birthday;
     }
 
-    @ShellMethod(value = "prints age info")
+    @ShellMethod(value = "prints age info", key = {"age", "age info"})
     public String ageInfo() {
         return String.format(AGE_REPORT,
                 context.getBirthday(),
