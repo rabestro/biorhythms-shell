@@ -1,6 +1,6 @@
 package lv.id.jc.biorhythms.cli.shell;
 
-import lv.id.jc.biorhythms.cli.model.Context;
+import lv.id.jc.biorhythms.cli.model.DateInfo;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
@@ -13,7 +13,7 @@ import java.time.Period;
 import java.time.temporal.TemporalAdjusters;
 
 @ShellComponent
-public record TimelineNavigation(Context context) {
+public record TimelineNavigation(DateInfo context) {
 
     @ShellMethod(value = "decrease report date by days", key = {"minus days", "-d"})
     public void minusDays(int days) {

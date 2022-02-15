@@ -1,6 +1,6 @@
 package lv.id.jc.biorhythms.cli.model;
 
-public record Indicator(Biorhythm biorhythm, Context context) {
+public record Indicator(Biorhythm biorhythm, DateInfo context) {
     public double value() {
         return context.days() < 0 ? Double.NaN
                 : Math.sin(2 * Math.PI * context.days() / biorhythm.period());

@@ -1,6 +1,6 @@
 package lv.id.jc.biorhythms.cli.printer;
 
-import lv.id.jc.biorhythms.cli.model.Context;
+import lv.id.jc.biorhythms.cli.model.DateInfo;
 import lv.id.jc.biorhythms.cli.model.ZodiacSign;
 import org.springframework.format.Printer;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import java.util.Locale;
 import static lv.id.jc.biorhythms.cli.formatter.DateFormatter.ORDINAL_SHORT_DATE;
 
 @Component("zodiacSignPrinter")
-public class ZodiacSignPrinter implements Printer<Context> {
+public class ZodiacSignPrinter implements Printer<DateInfo> {
     private static final String TEMPLATE = """
             %nZodiac Sign: %1$s
                  Symbol: %2$s
@@ -18,7 +18,7 @@ public class ZodiacSignPrinter implements Printer<Context> {
               Lucky Day: %5$tA%n""";
 
     @Override
-    public String print(Context object, Locale locale) {
+    public String print(DateInfo object, Locale locale) {
         final var zodiacSign = object.getBirthday().query(ZodiacSign::from);
         final var output = new StringBuilder(String.format(TEMPLATE,
                 zodiacSign,

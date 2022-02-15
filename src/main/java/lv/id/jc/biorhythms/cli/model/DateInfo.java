@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 @Component("context")
-public class Context {
+public class DateInfo {
     @Value("${biorhythm.birthday}")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthday;

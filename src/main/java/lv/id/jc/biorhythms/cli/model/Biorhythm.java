@@ -32,7 +32,7 @@ public enum Biorhythm {
         return Stream.of(INTUITION, AESTHETIC, AWARENESS, SPIRITUAL);
     }
 
-    public Indicator getIndicatorOf(Context context) {
+    public Indicator getIndicatorOf(DateInfo context) {
         return new Indicator(this, context);
     }
 
